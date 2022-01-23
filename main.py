@@ -4,7 +4,7 @@ import random
 import time
 import requests
 import config as cfg
-from selenium import webdriver
+from selenium import webdriver  
 
 def obtenerImagenes():
     #Ponemos el Contador según el valor que nosotros queramos que empieze
@@ -13,7 +13,12 @@ def obtenerImagenes():
     word_site = "https://www.mit.edu/~ecprice/wordlist.10000"
 
     response = requests.get(word_site)
-    WORDS = response.content.splitlines()
+    dictionary = response.content.splitlines()
+
+    WORDS = []
+    for sub in dictionary:
+        sub = str(sub)
+        WORDS.append(sub.replace("'b", "").replace("'", ""))
 
     #Creamos la Instancia del Navegador
     driver = webdriver.Chrome(cfg.PATH_WEB_DRIVER_EXE)
@@ -34,6 +39,8 @@ def obtenerImagenes():
         typeSelected = random.randrange(0, numImages-1)
         #Obtenemos una palabra también aleatoria pero del array que tenemos en el fichero de Configuración
         wordSelected = str(random.choice(WORDS)).replace("b'", "").replace("'","")
+
+        WORDS.pop(WORDS.index(wordSelected))
 
         time.sleep(1)
         
