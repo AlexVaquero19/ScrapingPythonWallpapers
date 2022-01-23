@@ -2,12 +2,18 @@
 import os
 import random
 import time
+import requests
 import config as cfg
 from selenium import webdriver
 
 def obtenerImagenes():
     #Ponemos el Contador según el valor que nosotros queramos que empieze
     counter = int(input("Input a Counter: "))
+
+    word_site = "https://www.mit.edu/~ecprice/wordlist.10000"
+
+    response = requests.get(word_site)
+    WORDS = response.content.splitlines()
 
     #Creamos la Instancia del Navegador
     driver = webdriver.Chrome(cfg.PATH_WEB_DRIVER_EXE)
@@ -27,7 +33,9 @@ def obtenerImagenes():
         #Seleccionamos el Tipo con el Click de manera aleatoria
         typeSelected = random.randrange(0, numImages-1)
         #Obtenemos una palabra también aleatoria pero del array que tenemos en el fichero de Configuración
-        wordSelected = random.choice(cfg.arrayWords)
+        wordSelected = str(random.choice(WORDS)).replace("b'", "").replace("'","")
+
+        time.sleep(1)
         
         #Ponemos en el Input donde va a ir la Palabara, la que hemos escogido de manera aleatoria
         driver.find_element_by_xpath(cfg.input).send_keys(wordSelected)

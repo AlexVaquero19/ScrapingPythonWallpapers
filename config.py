@@ -17,4 +17,4 @@ directoryDownloadsES = 'C:\\Usuarios\\'+getpass.getuser()+"\\Descargas\\"
 directoryDownloadsEN = 'C:\\Users\\'+getpass.getuser()+"\\Downloads\\"
 
 #Array de Palabras para los fondos aleatorios
-arrayWords = ['HeadPhones', 'Birds', 'Fire', 'Forest', 'Volcano', 'Paint Drops', 'Car', 'Computers', 'Guns']
+#arrayWords = ['HeadPhones', 'Birds', 'Fire', 'Forest', 'Volcano', 'Paint Drops', 'Car', 'Computers', 'Guns']
