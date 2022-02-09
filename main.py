@@ -16,7 +16,7 @@ def obtenerImagenes():
     driver.get(cfg.url)
     driver.maximize_window()
 
-    time.sleep(2)
+    time.sleep(1)
 
     #Make an infinite loop to create the wallpaper
     while True:
@@ -40,12 +40,17 @@ def obtenerImagenes():
         #Press the create button
         driver.find_element(By.XPATH, cfg.buttonSubmit).click()
 
-        #Wait 25 seconds until the wallpaper is created
-        time.sleep(25)
+        clickable = False
 
-        #Click on "Buy Print"
-        driver.find_element(By.XPATH, cfg.buttonBuy).click()
-        time.sleep(5)
+        while clickable == False:
+            try:
+                #Click on "Buy Print"
+                driver.find_element(By.XPATH, cfg.buttonBuy).click()
+                clickable = True
+            except:
+                pass
+
+        time.sleep(0.5)
         #We move to the second window
         driver.switch_to.window(driver.window_handles[1])
 
@@ -70,7 +75,7 @@ def obtenerImagenes():
         #Come back to the main window
         driver.switch_to.window(driver.window_handles[0])
         driver.find_element(By.XPATH, cfg.backButton).click()
-        time.sleep(1)
+        time.sleep(0.5)
         #Clear the input text to put the new word and start again
         driver.find_element(By.XPATH, cfg.input).clear()
 
