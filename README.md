@@ -1,2 +1,2 @@
 # SeleniumImagesAI
-Gracias a https://app.wombo.art/, con Selenium y Python, he creado un código que a través de un Array de Palabras va generando fondos de pantalla aleatorios con todas las opciones/tipos que tiene la la Página.
+Tanks to https://app.wombo.art/, with Python and Selenium, I created a code who generates random Wallpapers from a words array and different styles.
