@@ -1,8 +1,8 @@
 #Importamos todo lo necesario
-import os
-import random
 import time
-#import requests
+import random
+import datetime
+import urllib.request
 import config as cfg
 from selenium import webdriver  
 from selenium.webdriver.common.by import By
@@ -46,21 +46,21 @@ def obtenerImagenes():
         time.sleep(5)
         #Nos movemos con el Driver a la pestaña que se ha abierto
         driver.switch_to.window(driver.window_handles[1])
-        #Se generará un Div con la Imágen y cogemos el SRC y descargamos esa imágen
-        imgUrl = driver.find_element(By.XPATH, cfg.imgDownloadPath).get_attribute("src")
-        driver.get(imgUrl)
 
-        time.sleep(3)
-        
-        #Después cogemos esa imágenn que siempre se llama igual y la reemplazamos el nombre por el Contador mas la palabra seleccionada mas la extensión
-        filename = str(counter) + "_" + wordSelected.lower().replace(" ", "_") + ".jpg"
-        try:
-            os.rename(cfg.directoryDownloadsES+"final.jpg", cfg.directoryDownloadsES+filename)
-        except:
-            os.rename(cfg.directoryDownloadsEN+"final.jpg", cfg.directoryDownloadsEN+filename)
-        
+        #Cogemos la Fecha y Hora y se la añadimos al nombre de la Imagen
+        now = datetime.datetime.now()
+        formatFileName = "_" + now.strftime("%d %m %Y %H %M %S").replace(" ", "") + ".jpg"
+
+        filename = str(counter) + "_" + wordSelected.lower().replace(" ", "_") + formatFileName
+        imgUrl = driver.find_element(By.XPATH, cfg.imgDownloadPath).get_attribute("src")
+
+        #Guardamos la Imagen en el Directorio de Descargas
+        urllib.request.urlretrieve(imgUrl, cfg.directoryDownloadsEN + filename)
+
         #Sumamos el Contador
         counter += 1
+
+        time.sleep(0.5)
 
         #Cerramos la ventana
         driver.close()
