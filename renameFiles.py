@@ -1,9 +1,10 @@
 import os
 from pathlib import Path
 
+#This file we only use if you delete some image and you don't want images with no correlative numbers
+
 fileName = ""
 homePath = str(Path.home())
-#dirs = [homePath + "\\Downloads\\Wallpapers\\", homePath + "\\OneDrive\\Fotos\\FondosIA\\"]
 dirs = [homePath + "\\OneDrive\\Fotos\\FondosIA\\"]
 
 for dir in dirs:
