@@ -3,8 +3,7 @@ from pathlib import Path
 
 dir = os.getcwd() #Get directory
 homePath = str(Path.home())
-dir_ficheros = homePath + "\\OneDrive\\Fotos\\FondosIA\\"
-PATH_WEB_DRIVER_EXE = r""+dir+"\Ficheros\chromedriver.exe" #Chrome Web Driver
+PATH_WEB_DRIVER_EXE = r""+dir+"\Files\chromedriver.exe" #Chrome Web Driver
 url = 'https://app.wombo.art/' #URL page AI wallpapers
 
 #XPATHs
