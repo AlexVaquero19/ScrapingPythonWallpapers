@@ -19,7 +19,7 @@ directoryDownloadsEN = str(Path.home()) + "\\OneDrive\\Fotos\\FondosIA\\"
 
 #Array Words to create random wallpapers
 arrayWords = [
-             'Abstract Clouds', '3D Paints', 'Paint Drops', 'Abstract Patterns', 'Abstract Cubes', 'Magic Sunset', 'Water Droplets', 'Sky', 'Marble Wallpaper', 'HDR Space Cloud',
-             'Dark Moonlight', 'Wolfs', 'Neon Glow', 'Puzzle', 'Skullpaper', 'Ink Colour', 'Trippy Sky'
+             'Abstract Clouds', '3D Paints', 'Paint Drops', 'Abstract Patterns', 'Abstract Cubes', 'Sky Cloudly', 'HDR Space Cloud',
+             'Dark Moonlight', 'Wolfs', 'Neon Glow', 'Skullpaper', 'Ink Colour', 'Trippy Sky'
 ]
 arrayTypes = [3,4,5,6,8,9,11,12,14,16]
