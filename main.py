@@ -27,7 +27,7 @@ def obtenerImagenes():
         #We click the type for the wallpaper
         typeSelected = int(random.choice(cfg.arrayTypes))
         #We choose a random word from the array words
-        wordSelected = str(random.choice(cfg.arrayWords)).replace("b'", "").replace("'","")
+        wordSelected = str(random.choice(cfg.arrayWords))
 
         time.sleep(1)
         
