@@ -22,4 +22,4 @@ arrayWords = [
              'Abstract Clouds', '3D Paints', 'Paint Drops', 'Abstract Patterns', 'Abstract Cubes', 'Sky Cloudly', 'HDR Space Cloud',
              'Dark Moonlight', 'Wolfs', 'Neon Glow', 'Skullpaper', 'Ink Colour', 'Trippy Sky'
 ]
-arrayTypes = [3,4,5,6,8,9,11,12,14,16]
+arrayTypes = [0,1,5,6,7,8,10,11,13,14,15,16,18]
