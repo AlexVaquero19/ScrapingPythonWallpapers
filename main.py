@@ -1,4 +1,5 @@
 #Imports
+import os
 import time
 import random
 import datetime
@@ -8,9 +9,6 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 
 def obtenerImagenes():
-    #Put the counter the number of you need to start count
-    counter = int(input("Input a Counter: "))
-
     #Create Chrome instance
     driver = webdriver.Chrome(cfg.PATH_WEB_DRIVER_EXE)
     driver.get(cfg.url)
@@ -50,7 +48,7 @@ def obtenerImagenes():
             except:
                 pass
 
-        time.sleep(0.5)
+        time.sleep(1.5)
         #We move to the second window
         driver.switch_to.window(driver.window_handles[1])
 
@@ -58,16 +56,18 @@ def obtenerImagenes():
         now = datetime.datetime.now()
         formatFileName = "_" + now.strftime("%d %m %Y %H %M %S").replace(" ", "") + ".jpg"
 
-        filename = str(counter) + "_" + wordSelected.lower().replace(" ", "_") + formatFileName
+        filename = wordSelected.lower().replace(" ", "_") + formatFileName
         imgUrl = driver.find_element(By.XPATH, cfg.imgDownloadPath).get_attribute("src")
 
         #We save the wallpaper on the directory path you selected on config.py
-        urllib.request.urlretrieve(imgUrl, cfg.directoryDownloadsEN + filename)
+        directoryToCreate = cfg.directoryDownloadsEN + wordSelected.replace(" ", "_")
+        if(checkDirectory(directoryToCreate)):
+            urllib.request.urlretrieve(imgUrl, directoryToCreate.lower() + "\\" + filename)
+        else:
+            os.mkdir(directoryToCreate)
+            urllib.request.urlretrieve(imgUrl, directoryToCreate.lower() + "\\" + filename)
 
-        #Increase the counter
-        counter += 1
-
-        time.sleep(0.5)
+        time.sleep(1.5)
 
         #Close the window
         driver.close()
@@ -78,5 +78,9 @@ def obtenerImagenes():
         time.sleep(0.5)
         #Clear the input text to put the new word and start again
         driver.find_element(By.XPATH, cfg.input).clear()
+    
+def checkDirectory(directoryToCreate):
+    return os.path.isdir(directoryToCreate)
+    
 
 obtenerImagenes()
