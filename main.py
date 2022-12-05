@@ -19,11 +19,11 @@ def obtenerImagenes():
     #Make an infinite loop to create the wallpaper
     while True:
         #We choose a random word from the array types
-        divImages = driver.find_element(By.CLASS_NAME, ("XIGWN"))
+        divImages = driver.find_element(By.XPATH, cfg.images)
         typesToSelectImages = divImages.find_elements(By.TAG_NAME, "img")
 
         #We click the type for the wallpaper
-        typeSelected = int(random.choice(cfg.arrayTypes))
+        typeSelected = random.randint(0, 42)
         #We choose a random word from the array words
         wordSelected = str(random.choice(cfg.arrayWords))
 
@@ -44,11 +44,12 @@ def obtenerImagenes():
             try:
                 #Click on "Buy Print"
                 driver.find_element(By.XPATH, cfg.buttonBuy).click()
+                driver.switch_to.window(driver.window_handles[1])
                 clickable = True
             except:
                 pass
 
-        time.sleep(1.5)
+        time.sleep(2.5)
         #We move to the second window
         driver.switch_to.window(driver.window_handles[1])
 
