@@ -2,86 +2,105 @@
 import os
 import time
 import random
+import shutil
 import datetime
 import urllib.request
 import config as cfg
 from selenium import webdriver  
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
 
-def obtenerImagenes():
-    #Create Chrome instance
-    driver = webdriver.Chrome(cfg.PATH_WEB_DRIVER_EXE)
-    driver.get(cfg.url)
-    driver.maximize_window()
+def checkDirectory(directoryToCreate):
+  return os.path.isdir(directoryToCreate)
+
+def obtenerImagenes(chop):
+  driver = webdriver.Chrome(cfg.PATH_WEB_DRIVER_EXE, chrome_options=chop)
+  driver.get(cfg.url)
+  driver.maximize_window()
+
+  time.sleep(1)
+
+  stylesDiv = driver.find_element(By.XPATH, cfg.styles)
+  stylesImages = stylesDiv.find_elements(By.TAG_NAME, "img")
+
+  checkedAd = False
+
+  #Make an infinite loop to create the wallpaper
+  while True:
+    #We choose a random word from the array words
+    wordSelected = str(random.choice(cfg.arrayWords))
 
     time.sleep(1)
 
-    #Make an infinite loop to create the wallpaper
-    while True:
-        #We choose a random word from the array types
-        divImages = driver.find_element(By.XPATH, cfg.images)
-        typesToSelectImages = divImages.find_elements(By.TAG_NAME, "img")
+    #We put the random word on the input
+    driver.find_element(By.XPATH, cfg.input).send_keys(wordSelected)
+    time.sleep(1)
 
-        #We click the type for the wallpaper
-        typeSelected = random.randint(0, 42)
-        #We choose a random word from the array words
-        wordSelected = str(random.choice(cfg.arrayWords))
+    isPremium = True
+    while isPremium == True:
+      #We click the type for the wallpaper
+      typeSelected = random.randint(0, 88)
 
-        time.sleep(1)
-        
-        #We put the random word on the input
-        driver.find_element(By.XPATH, cfg.input).send_keys(wordSelected)
-        time.sleep(1)
-        #Select type
-        typesToSelectImages[typeSelected].click()
-        time.sleep(1)
-        #Press the create button
-        driver.find_element(By.XPATH, cfg.buttonSubmit).click()
+      #Select Type
+      stylesImages[typeSelected].click()
 
-        clickable = False
+      try:
+        driver.find_element(By.XPATH, cfg.adPremiumClose).click()
+        isPremium = True
+      except:
+        isPremium = False
 
-        while clickable == False:
-            try:
-                #Click on "Buy Print"
-                driver.find_element(By.XPATH, cfg.buttonBuy).click()
-                driver.switch_to.window(driver.window_handles[1])
-                clickable = True
-            except:
-                pass
+    if not checkedAd:
+      noAds = False
+      while noAds == False:
+        try:
+          driver.find_element(By.XPATH, cfg.adTwoClose).click()
+          noAds = True
+        except:
+          pass
 
-        time.sleep(2.5)
-        #We move to the second window
-        driver.switch_to.window(driver.window_handles[1])
+    #Press the create button
+    try:
+      driver.find_element(By.XPATH, cfg.createArtBtn).click()
+      noAds = True
+    except:
+      time.sleep(1.5)
+      driver.find_element(By.XPATH, cfg.adPremiumClose).click()
 
-        #We take the date and hour to put to the wallpaper name
-        now = datetime.datetime.now()
-        formatFileName = "_" + now.strftime("%d %m %Y %H %M %S").replace(" ", "") + ".jpg"
+    clickable = False
 
-        filename = wordSelected.lower().replace(" ", "_") + formatFileName
-        imgUrl = driver.find_element(By.XPATH, cfg.imgDownloadPath).get_attribute("src")
-
-        #We save the wallpaper on the directory path you selected on config.py
-        directoryToCreate = cfg.directoryDownloadsEN + wordSelected.replace(" ", "_")
-        if(checkDirectory(directoryToCreate)):
-            urllib.request.urlretrieve(imgUrl, directoryToCreate.lower() + "\\" + filename)
-        else:
-            os.mkdir(directoryToCreate)
-            urllib.request.urlretrieve(imgUrl, directoryToCreate.lower() + "\\" + filename)
-
-        time.sleep(1.5)
-
-        #Close the window
-        driver.close()
-
-        #Come back to the main window
-        driver.switch_to.window(driver.window_handles[0])
-        driver.find_element(By.XPATH, cfg.backButton).click()
-        time.sleep(0.5)
-        #Clear the input text to put the new word and start again
-        driver.find_element(By.XPATH, cfg.input).clear()
+    while clickable == False:
+      try:
+          #Click on "Buy Print"
+          driver.find_element(By.XPATH, cfg.downloadBtn).click()
+          clickable = True
+      except:
+          pass
+      
+    time.sleep(3)
     
-def checkDirectory(directoryToCreate):
-    return os.path.isdir(directoryToCreate)
-    
+    #We take the date and hour to put to the wallpaper name
+    now = datetime.datetime.now()
+    formatFileName = "_" + now.strftime("%d %m %Y %H %M %S").replace(" ", "") + ".jpg"
+    #We save the wallpaper on the directory path you selected on config.py
+    filename = wordSelected.lower().replace(" ", "_") + formatFileName
 
-obtenerImagenes()
+    fileToRename = cfg.downloadsDirectory + "\\" + "dream_TradingCard.jpg"
+    fileRenamed = cfg.downloadsDirectory + "\\" + wordSelected.lower().replace(" ", "_") + formatFileName
+    os.rename(fileToRename, fileRenamed)
+
+    directoryToCreate = cfg.directoryDownloadsEN + wordSelected.replace(" ", "_")
+    if(checkDirectory(directoryToCreate)):
+      shutil.move(fileRenamed, os.path.join(directoryToCreate.lower(), filename))
+    else:
+      os.mkdir(directoryToCreate)
+      shutil.move(fileRenamed, os.path.join(directoryToCreate.lower(), filename))
+    
+    #Clear the input text to put the new word and start again
+    driver.find_element(By.XPATH, cfg.input).clear()
+    checkedAd = True
+
+chop = webdriver.ChromeOptions()
+chop.add_extension(cfg.path_to_extension)
+
+obtenerImagenes(chop)

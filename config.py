@@ -2,21 +2,24 @@ import os
 from pathlib import Path
 
 dir = os.getcwd() #Get directory
+downloadsDirectory = os.path.expanduser('~\\Downloads')
 homePath = str(Path.home())
+path_to_extension =  r""+dir+"\\Files\\adblock.crx"
 PATH_WEB_DRIVER_EXE = r""+dir+"\Files\chromedriver.exe" #Chrome Web Driver
 url = 'https://dream.ai/create/' #URL page AI wallpapers
 
 #XPATHs
-input = '/html/body/div/div/div[3]/div/div/div[1]/div[1]/div[1]/div[1]/div[1]/input'
-buttonSubmit = '/html/body/div/div/div[3]/div/div/div[1]/div[2]/button'
-buttonBuy = '/html/body/div/div/div[3]/div/div/div[1]/div[2]/div[1]/div[5]/div[2]/div[2]/button'
-images = '/html/body/div/div/div[3]/div/div/div[1]/div[1]/div[1]/div[2]/div/div[2]'
-backButton = '/html/body/div/div/div[3]/div/div/div[1]/div[1]/div/button'
-imgDownloadPath = '/html/body/main/section/section/div/div[1]/slider-component/ul/li[2]/modal-opener/div/img'
+input = "/html/body/div/div/div[4]/div/div[2]/div[1]/div[1]/div/div[3]/div[1]/div[1]/input"
+styles = "/html/body/div/div/div[4]/div/div[2]/div[1]/div[1]/div/div[3]/div[2]/div/div[2]"
+createArtBtn = "/html/body/div/div/div[4]/div/div[2]/div[1]/div[2]/button"
+downloadBtn = "/html/body/div/div/div[4]/div/div[2]/div[2]/div[1]/div/div/div[1]/div/div/div/div[3]"
+
+adPremiumClose = "/html/body/div[1]/div/div[3]/div/div/div[1]/button"
+adTwoClose = "/html/body/div[1]/div/div[1]/div/div/div[1]/button"
 
 #Directory in Spanish and English
-directoryDownloadsES = str(Path.home()) + "\\OneDrive\\Fotos\\FondosIA\\"
-directoryDownloadsEN = str(Path.home()) + "\\OneDrive\\Fotos\\FondosIA\\"
+directoryDownloadsES = str(Path.home()) + "\\OneDrive\\Fotos\\FondosIANew\\"
+directoryDownloadsEN = str(Path.home()) + "\\OneDrive\\Fotos\\FondosIANew\\"
 
 #Array Words to create random wallpapers
 arrayWords = ['Urban Painting', 'Cloudy Day',
