@@ -15,11 +15,10 @@ createArtBtn = "/html/body/div/div/div[4]/div/div[2]/div[1]/div[2]/button"
 downloadBtn = "/html/body/div/div/div[4]/div/div[2]/div[2]/div[1]/div/div/div[1]/div/div/div/div[3]"
 
 adPremiumClose = "/html/body/div[1]/div/div[3]/div/div/div[1]/button"
-adTwoClose = "/html/body/div[1]/div/div[1]/div/div/div[1]/button"
+adClose = "/html/body/div[1]/div/div[1]/div/div/div[1]/button"
 
 #Directory in Spanish and English
-directoryDownloadsES = str(Path.home()) + "\\OneDrive\\Fotos\\FondosIANew\\"
-directoryDownloadsEN = str(Path.home()) + "\\OneDrive\\Fotos\\FondosIANew\\"
+directoryDownloads = os.path.expanduser('~\\OneDrive\\Fotos\\FondosIANew\\') #str(Path.home()) + "\\OneDrive\\Fotos\\FondosIANew\\"
 
 #Array Words to create random wallpapers
 arrayWords = ['Urban Painting', 'Cloudy Day',

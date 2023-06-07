@@ -4,11 +4,9 @@ import time
 import random
 import shutil
 import datetime
-import urllib.request
 import config as cfg
 from selenium import webdriver  
 from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.options import Options
 
 def checkDirectory(directoryToCreate):
   return os.path.isdir(directoryToCreate)
@@ -89,7 +87,7 @@ def obtenerImagenes(chop):
     fileRenamed = cfg.downloadsDirectory + "\\" + wordSelected.lower().replace(" ", "_") + formatFileName
     os.rename(fileToRename, fileRenamed)
 
-    directoryToCreate = cfg.directoryDownloadsEN + wordSelected.replace(" ", "_")
+    directoryToCreate = cfg.directoryDownloads + wordSelected.replace(" ", "_")
     if(checkDirectory(directoryToCreate)):
       shutil.move(fileRenamed, os.path.join(directoryToCreate.lower(), filename))
     else:
