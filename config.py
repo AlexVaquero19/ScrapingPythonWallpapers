@@ -18,7 +18,8 @@ adPremiumClose = "/html/body/div[1]/div/div[3]/div/div/div[1]/button"
 adClose = "/html/body/div[1]/div/div[1]/div/div/div[1]/button"
 
 #Directory in Spanish and English
-directoryDownloads = os.path.expanduser('~\\OneDrive\\Fotos\\FondosIANew\\') #str(Path.home()) + "\\OneDrive\\Fotos\\FondosIANew\\"
+directoryDownloadsES = os.path.expanduser('~\\Desktop\\Wallpapers\\') #str(Path.home()) + "\\OneDrive\\Fotos\\FondosIANew\\"
+directoryDownloadsEN = os.path.expanduser('~\\Desktop\\Wallpapers\\') #str(Path.home()) + "\\OneDrive\\Fotos\\FondosIANew\\"
 
 #Array Words to create random wallpapers
 arrayWords = ['Urban Painting', 'Cloudy Day',

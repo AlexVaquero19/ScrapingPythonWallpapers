@@ -83,7 +83,7 @@ def obtenerImagenes():
     driver.find_element(By.XPATH, cfg.input).clear() 
 
 def moveDownload(fileRenamed, wordSelected, filename):
-  directoryToCreate = os.path.join(cfg.directoryDownloads, wordSelected)
+  directoryToCreate = os.path.join(cfg.directoryDownloadsEN, wordSelected)
   if(checkDirectory(directoryToCreate)):
     shutil.move(fileRenamed, os.path.join(directoryToCreate.lower(), filename))
   else:
